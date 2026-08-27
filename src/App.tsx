@@ -1,166 +1,142 @@
 import React, { useState } from 'react';
 
 export default function App() {
-  const [isTapeOpen, setIsTapeOpen] = useState(false);
-  const [activeBlade, setActiveBlade] = useState<number | null>(null);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [activeProject, setActiveProject] = useState<number | null>(0);
 
   const projects = [
-    { id: 'BLADE_01', title: 'Threat Intelligence SIEM', category: 'DETECTION ENGINE', desc: 'Real-time anomaly detection engine with machine learning logs', metrics: '2.4M/s' },
-    { id: 'BLADE_02', title: 'Zero Trust NAC Platform', category: 'NETWORK ACCESS', desc: 'Identity-aware network access control for remote team', metrics: '140 NODE' },
-    { id: 'BLADE_03', title: 'Autonomous Vuln Scanner', category: 'SURFACE MGMT', desc: 'Continuous attack surface management & risk scoring', metrics: '12K TARGETS' },
-    { id: 'BLADE_04', title: 'IR Automation Framework', category: 'ORCHESTRATION', desc: 'Automated incident response playbooks & containment', metrics: '52 RULES' },
-    { id: 'BLADE_05', title: 'Supply Chain Security Gate', category: 'CI/CD INTEGRITY', desc: 'Software supply chain integrity verification & policy gate', metrics: '80 REPOS' },
+    { 
+      id: '01', 
+      title: 'Threat Intelligence SIEM', 
+      category: 'Detection Engine', 
+      metrics: '2.4M Logs/sec', 
+      period: '2025 - PRESENT',
+      desc: 'Real-time anomaly detection engine with machine learning log processing. Built for high-throughput enterprise security monitoring.' 
+    },
+    { 
+      id: '02', 
+      title: 'Zero Trust NAC Platform', 
+      category: 'Network Access Control', 
+      metrics: '140 Distributed Nodes', 
+      period: '2024 - 2025',
+      desc: 'Identity-aware network access control for remote teams. Implemented continuous authentication and posture assessment.' 
+    },
+    { 
+      id: '03', 
+      title: 'Autonomous Vuln Scanner', 
+      category: 'Attack Surface Mgmt', 
+      metrics: '12,000 Targets', 
+      period: '2024',
+      desc: 'Automated infrastructure scanning pipeline designed for continuous attack surface analysis and risk scoring.' 
+    },
+    { 
+      id: '04', 
+      title: 'IR Automation Framework', 
+      category: 'Orchestration & SOAR', 
+      metrics: '52 Response Playbooks', 
+      period: '2023 - 2024',
+      desc: 'Automated incident response framework integrating multiple security vendor APIs to reduce Mean Time to Respond (MTTR).' 
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-[#0E1117] text-slate-200 font-sans flex flex-col justify-between p-6 sm:p-12 select-none antialiased">
+    /* 배경색을 기존 #0B0914에서 좀 더 쾌적한 #13111C로 변경 */
+    <div className="min-h-screen bg-[#13111C] text-slate-100 font-sans flex flex-col justify-between selection:bg-purple-500 selection:text-white antialiased">
       
-      {/* 1. TOP NAVIGATION */}
-      <header className="max-w-6xl w-full mx-auto flex justify-between items-center text-xs font-mono border-b border-slate-800/80 pb-5 text-slate-400">
-        <div className="flex items-center gap-3">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]"></span>
-          <span className="tracking-widest font-semibold text-slate-200">DATACENTER // NODE_01</span>
+      {/* HEADER */}
+      <header className="sticky top-0 z-30 bg-[#13111C]/90 backdrop-blur-md border-b border-purple-900/30 px-6 sm:px-16 py-5">
+        <div className="max-w-6xl mx-auto flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <span className="w-2.5 h-2.5 rounded-full bg-fuchsia-400 shadow-[0_0_12px_#e879f9]"></span>
+            <span className="font-bold tracking-tight text-sm text-white">Yeom Wonyoung</span>
+            <span className="text-slate-500 font-mono text-xs">/</span>
+            <span className="text-xs font-mono text-purple-300 font-medium">Security Engineer</span>
+          </div>
+
+          <button 
+            onClick={() => setIsProfileOpen(true)}
+            className="text-xs font-mono px-4 py-2 rounded-lg bg-purple-600/20 border border-purple-500/40 text-purple-200 hover:bg-purple-600 hover:text-white transition-all duration-200 font-semibold cursor-pointer shadow-[0_0_15px_rgba(168,85,247,0.15)]"
+          >
+            [ OPERATOR FILE ]
+          </button>
         </div>
-        <button 
-          onClick={() => setIsTapeOpen(true)}
-          className="hover:text-purple-400 transition-colors cursor-pointer tracking-wider"
-        >
-          [ OPERATOR TAPE ]
-        </button>
       </header>
 
-      {/* 2. MAIN PHYSICAL RACK OBJECT */}
-      <main className="my-auto max-w-4xl w-full mx-auto py-10">
-        
-        <div className="mb-4 flex justify-between items-end font-mono text-xs text-slate-500 px-2">
-          <span>FRAME: HEAVY-DUTY RACK 42U</span>
-          <span>STATUS: ALL BLADES FUNCTIONAL</span>
+      {/* HERO & CONTENT */}
+      <main className="max-w-6xl w-full mx-auto px-6 sm:px-16 py-16 sm:py-20 my-auto">
+        <div className="max-w-3xl mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/60 border border-purple-700/40 mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-400"></span>
+            <p className="text-xs font-mono text-fuchsia-300 tracking-wider uppercase">Architecture & Defense Systems</p>
+          </div>
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight mb-6">
+            Securing infrastructure at scale with <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-fuchsia-300 drop-shadow-[0_0_20px_rgba(216,180,254,0.4)]">clarity</span> and <span className="text-purple-300 drop-shadow-[0_0_20px_rgba(196,181,253,0.3)]">precision</span>.
+          </h1>
+          <p className="text-base text-slate-300 leading-relaxed max-w-2xl">
+            A showcase of core security platforms, detection pipelines, and automated response frameworks built for enterprise resilience.
+          </p>
         </div>
 
-        {/* Outer Metal Chassis (3D Physical Frame) */}
-        <div className="bg-[#151A24] border-2 border-[#263044] rounded-2xl p-6 sm:p-8 shadow-[0_30px_70px_rgba(0,0,0,0.8)] relative border-t-[#384660]">
-          
-          {/* Top Exhaust Vent Panel (LED Lights Updated) */}
-          <div className="bg-[#0D1117] border border-slate-800 rounded-xl p-3 mb-6 flex justify-between items-center font-mono text-[11px] text-slate-500 shadow-inner">
-            <div className="flex gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse"></span>
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_6px_#10b981]"></span>
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_6px_#10b981]"></span>
-            </div>
-            <span className="tracking-wider text-slate-400">SYSTEM EXHAUST VENT // DUAL COOLING ACTIVE</span>
-            <span className="text-emerald-400 font-bold">24°C</span>
+        {/* PROJECTS */}
+        <div className="space-y-4">
+          <div className="flex justify-between items-center text-xs font-mono text-slate-400 pb-3 border-b border-purple-900/40 px-2">
+            <span>PROJECTS // ARCHIVE</span>
+            <span>SPECIFICATION & SCOPE</span>
           </div>
 
-          {/* TAPE-00 : PHYSICAL CARTRIDGE SLOT */}
-          <div 
-            onClick={() => setIsTapeOpen(!isTapeOpen)}
-            className="group relative mb-6 bg-gradient-to-r from-purple-950/80 via-[#1F172B] to-[#151A24] border-2 border-purple-500/50 hover:border-purple-400 rounded-xl p-4 sm:p-5 flex justify-between items-center cursor-pointer transition-all duration-300 shadow-lg shadow-purple-950/30 hover:scale-[1.005]"
-          >
-            <div className="flex items-center gap-4">
-              <span className="w-3 h-3 rounded-full bg-slate-700 border border-slate-600 flex items-center justify-center text-[8px] text-slate-900 font-bold">+</span>
-              <span className="px-2.5 py-1 text-xs font-mono bg-purple-900/90 text-purple-200 rounded border border-purple-500 font-bold tracking-wider">
-                TAPE-00
-              </span>
-              <div>
-                <span className="text-base font-semibold text-white group-hover:text-purple-200 transition-colors">
-                  OPERATOR PROFILE // YEOM WONYOUNG
-                </span>
-                <p className="text-xs font-mono text-purple-300/70">SECURITY ENGINEER & SYSTEM ARCHITECT</p>
-              </div>
-            </div>
+          {projects.map((item, idx) => (
+            <div 
+              key={item.id}
+              onClick={() => setActiveProject(activeProject === idx ? null : idx)}
+              /* 카드 배경색 명도를 한 단계 높여서 입체감 형성 */
+              className={`group p-6 sm:p-8 rounded-2xl border transition-all duration-300 cursor-pointer relative overflow-hidden ${
+                activeProject === idx 
+                  ? 'bg-[#221C35] border-purple-400/80 shadow-[0_10px_30px_rgba(168,85,247,0.2)]' 
+                  : 'bg-[#1A1528] border-purple-900/40 hover:border-purple-600/60 hover:bg-[#1E192F]'
+              }`}
+            >
+              {activeProject === idx && (
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-400 to-fuchsia-400 shadow-[0_0_12px_#c084fc]"></div>
+              )}
 
-            <span className="text-xs font-mono bg-purple-900/40 text-purple-300 border border-purple-700/60 px-3 py-1.5 rounded-lg group-hover:bg-purple-800 group-hover:text-white transition-all">
-              {isTapeOpen ? 'EJECT CARTRIDGE ⏏' : 'PULL CARTRIDGE ↘'}
-            </span>
-          </div>
-
-          {/* SERVER RACK SLOTS */}
-          <div className="space-y-3.5 relative">
-            {projects.map((item, idx) => (
-              <div 
-                key={item.id}
-                onClick={() => setActiveBlade(activeBlade === idx ? null : idx)}
-                className={`relative rounded-xl border-2 transition-all duration-200 cursor-pointer overflow-hidden ${
-                  activeBlade === idx 
-                    ? 'bg-[#1E2636] border-purple-400 shadow-2xl' 
-                    : 'bg-[#121722] border-slate-800 hover:border-slate-600 hover:bg-[#171E2C]'
-                }`}
-              >
-                <div className="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b from-slate-600 to-slate-800 border-r border-slate-900"></div>
-
-                <div className="p-4 sm:p-5 pl-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                  <div className="flex items-center gap-4">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]"></span>
-                    <span className="text-xs font-mono text-slate-500 font-bold tracking-wider">{item.id}</span>
-                    <span className="text-base font-semibold text-slate-100">{item.title}</span>
-                  </div>
-
-                  <div className="flex items-center gap-4 text-xs font-mono">
-                    <span className="hidden md:inline text-slate-400">{item.category}</span>
-                    <span className="px-3 py-1 bg-[#0A0D12] border border-slate-700 text-slate-300 rounded-md font-bold">
-                      {item.metrics}
-                    </span>
-                  </div>
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="flex items-start md:items-center gap-6">
+                  <span className={`text-xs font-mono pt-1 md:pt-0 font-bold ${activeProject === idx ? 'text-purple-300' : 'text-slate-400'}`}>
+                    {item.id}
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-purple-200 transition-colors">
+                    {item.title}
+                  </h3>
                 </div>
 
-                {activeBlade === idx && (
-                  <div className="px-6 pb-5 pt-1 text-sm text-slate-300 border-t border-slate-700/50 bg-[#161D2B] leading-relaxed">
-                    <p className="font-mono text-xs text-purple-400 mb-1">// BLADE SPECIFICATION</p>
-                    {item.desc}
-                  </div>
-                )}
+                <div className="flex items-center justify-between md:justify-end gap-6">
+                  <span className="hidden md:inline text-xs font-mono text-slate-300">{item.category}</span>
+                  <span className="text-xs font-mono text-fuchsia-200 px-3 py-1 rounded-md bg-fuchsia-950/60 border border-fuchsia-700/50 font-semibold">
+                    {item.metrics}
+                  </span>
+                  <span className="text-xs font-mono text-slate-400">{item.period}</span>
+                </div>
               </div>
-            ))}
-          </div>
 
-          {/* Bottom Chassis Power Rail */}
-          <div className="mt-6 pt-4 border-t border-slate-800 flex justify-between items-center text-xs font-mono text-slate-500">
-            <span>PWR: MAIN_BUS_48V</span>
-            <div className="flex gap-1">
-              {[...Array(12)].map((_, i) => (
-                <span key={i} className="w-2 h-3 bg-emerald-500/80 rounded-sm"></span>
-              ))}
+              {activeProject === idx && (
+                <div className="mt-6 pt-6 border-t border-purple-800/40 text-sm text-slate-200 leading-relaxed">
+                  <p className="max-w-3xl font-normal">{item.desc}</p>
+                </div>
+              )}
             </div>
-            <span>LOAD: 42%</span>
-          </div>
-
+          ))}
         </div>
       </main>
 
-      {/* 3. OPERATOR TAPE MODAL */}
-      {isTapeOpen && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex justify-center items-center p-4">
-          <div className="bg-[#151A24] border-2 border-purple-500/60 rounded-2xl p-8 max-w-md w-full shadow-2xl relative">
-            <button 
-              onClick={() => setIsTapeOpen(false)}
-              className="absolute top-4 right-4 text-xs font-mono bg-slate-800 border border-slate-700 text-slate-300 hover:text-white px-3 py-1 rounded cursor-pointer"
-            >
-              [ CLOSE ]
-            </button>
-
-            <span className="text-xs font-mono text-purple-400 font-bold">// TAPE-00 DATA</span>
-            <h2 className="text-2xl font-bold text-white mt-1 mb-1">Yeom Wonyoung</h2>
-            <p className="text-xs font-mono text-slate-400 mb-5">Security Engineer</p>
-
-            <p className="text-sm text-slate-300 leading-relaxed mb-6 font-sans">
-              Building defensive security systems at scale. Specializing in threat detection, zero-trust architecture, and DevSecOps automation.
-            </p>
-
-            <div className="space-y-2 border-t border-slate-800 pt-4 font-mono text-xs">
-              <p className="text-slate-500 mb-2">// CORE COMPETENCIES</p>
-              {['Threat Detection & SIEM', 'Zero Trust Architecture', 'Cloud Security (AWS/GCP)', 'Incident Response Automation'].map((skill, i) => (
-                <div key={i} className="bg-[#0D1117] text-slate-200 px-3 py-2 rounded border border-slate-800">
-                  ▸ {skill}
-                </div>
-              ))}
-            </div>
-          </div>
+      {/* FOOTER */}
+      <footer className="border-t border-purple-900/30 px-6 sm:px-16 py-8">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-slate-400">
+          <span>YEOM WONYOUNG — SECURITY PORTFOLIO</span>
+          <span className="text-purple-300 flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+            SYSTEM STATUS: ONLINE
+          </span>
         </div>
-      )}
-
-      {/* 4. FOOTER */}
-      <footer className="max-w-6xl w-full mx-auto text-center text-xs font-mono text-slate-600 border-t border-slate-800/80 pt-4">
-        HARDWARE-INSPIRED SECURITY PORTFOLIO // 2026
       </footer>
     </div>
   );

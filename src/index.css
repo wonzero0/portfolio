@@ -129,3 +129,17 @@ body {
   box-shadow: -4px 0 0 0 #800020, 0 0 20px rgba(128, 0, 32, 0.3);
   border-color: #800020 !important;
 }
+
+/* 퍼플 테두리의 macOS 커서 */
+html, body {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="white" stroke="%23c084fc" stroke-width="2"><path d="M3 3l7 18 3-7 7-3L3 3z"/></svg>'), auto;
+}
+
+button, a, [role="button"] {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="%23c084fc" stroke="white" stroke-width="1.5"><path d="M3 3l7 18 3-7 7-3L3 3z"/></svg>'), pointer !important;
+}
+
+/* 2. 모든 클릭 가능 요소에서 손가락 모양(pointer)을 지우고 macOS 커서 유지 */
+a, button, input, select, textarea, [role="button"], [onclick], .blade-unit, .group, label, *:hover {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="%23c084fc" stroke="white" stroke-width="1.5"><path d="M3 3l7 18 3-7 7-3L3 3z"/></svg>') 0 0, auto !important;
+}

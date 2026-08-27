@@ -1,0 +1,10 @@
+{
+  "description": "Interactive portfolio showcasing IT security projects as server rack units with detailed case studies and dynamic visuals for professional presentation.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

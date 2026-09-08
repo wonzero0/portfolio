@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
+interface SkillCategory {
+  category: string;
+  items: string[];
+}
+
 interface ProfileData {
   name: string;
   role: string;
   clearance: string;
   bio: string;
-  skills: string[];
+  skillCategories: SkillCategory[];
   certifications: string[];
   github: string;
   email: string;
@@ -14,15 +19,36 @@ interface ProfileData {
 export default function App() {
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   
-  const [profile, setProfile] = useState<ProfileData>({
+  const [profile] = useState<ProfileData>({
     name: 'Yeom Wonyoung',
     role: 'Security Engineer',
     clearance: 'LEVEL-4 AUTHORIZED',
     bio: 'Engineers enterprise-scale log processing, threat detection pipelines, and automated response frameworks built for resilience.',
-    skills: ['Python', 'Kubernetes', 'SIEM / Logstash', 'eBPF Detection', 'AWS Security', 'Zero Trust Architecture'],
+    skillCategories: [
+      {
+        category: 'Languages',
+        items: ['C', 'C++', 'Python']
+      },
+      {
+        category: 'AI / Machine Learning',
+        items: ['Machine Learning', 'Deep Learning']
+      },
+      {
+        category: 'OS & Environment',
+        items: ['Linux', 'Docker', 'VMware', 'VirtualBox']
+      },
+      {
+        category: 'Embedded Systems & Hardware',
+        items: ['Arduino', 'Raspberry Pi']
+      },
+      {
+        category: 'Tools & Security',
+        items: ['Git', 'GitHub', 'Nmap']
+      }
+    ],
     certifications: ['정보처리기사', '리눅스마스터 2급'],
-    github: 'https://github.com/your-id',
-    email: 'wonyoung@example.com'
+    github: 'https://github.com/wonzero0',
+    email: 'ywy5303@naver.com'
   });
 
   const [activeProject, setActiveProject] = useState<number | null>(null);
@@ -128,24 +154,24 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#13111C] text-slate-100 font-sans flex flex-col justify-between selection:bg-indigo-500 selection:text-white antialiased relative overflow-hidden">
+    <div className="min-h-screen bg-slate-50 text-slate-800 font-sans flex flex-col justify-between selection:bg-slate-900 selection:text-white antialiased relative overflow-hidden">
       
-      {/* MOUSE FOLLOW GLOW EFFECT */}
+      {/* DEEP GREEN/NAVY MILD GLOW */}
       <div 
         className="pointer-events-none fixed inset-0 z-0 transition-opacity duration-300"
         style={{
-          background: `radial-gradient(450px circle at ${cursorPos.x}px ${cursorPos.y}px, rgba(99, 102, 241, 0.15), transparent 80%)`
+          background: `radial-gradient(600px circle at ${cursorPos.x}px ${cursorPos.y}px, rgba(16, 185, 129, 0.08), transparent 80%)`
         }}
       />
 
-      {/* HEADER */}
-      <header className="sticky top-0 z-30 bg-[#13111C]/80 backdrop-blur-md border-b border-purple-900/30 px-6 sm:px-16 py-4">
+      {/* FIXED HEADER */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 px-6 sm:px-16 py-4 shadow-sm">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <span className="w-2.5 h-2.5 rounded-full bg-indigo-400 shadow-[0_0_12px_#818cf8]"></span>
-            <span className="font-bold tracking-tight text-sm text-white">{profile.name}</span>
-            <span className="text-slate-500 text-xs">/</span>
-            <span className="text-xs font-medium text-indigo-300">{profile.role}</span>
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+            <span className="font-bold tracking-tight text-sm text-slate-900">{profile.name}</span>
+            <span className="text-slate-300 text-xs">/</span>
+            <span className="text-xs font-semibold text-slate-500">{profile.role}</span>
           </div>
 
           <div className="flex items-center gap-3">
@@ -153,19 +179,19 @@ export default function App() {
               href={profile.github} 
               target="_blank" 
               rel="noreferrer"
-              className="hidden sm:inline-block text-xs text-slate-300 hover:text-white px-3 py-1.5 rounded-lg bg-purple-950/40 border border-purple-800/40 hover:border-indigo-500 transition-all"
+              className="hidden sm:inline-block text-xs font-semibold text-slate-700 hover:text-slate-900 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-300 transition-all shadow-sm"
             >
               GitHub ↗
             </a>
             <a 
               href={`mailto:${profile.email}`}
-              className="hidden sm:inline-block text-xs text-slate-300 hover:text-white px-3 py-1.5 rounded-lg bg-purple-950/40 border border-purple-800/40 hover:border-indigo-500 transition-all"
+              className="hidden sm:inline-block text-xs font-semibold text-slate-700 hover:text-slate-900 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-300 transition-all shadow-sm"
             >
               Email ↗
             </a>
             <button 
               onClick={() => setIsProfileModalOpen(true)}
-              className="text-xs font-semibold px-4 py-2 rounded-lg bg-indigo-500/10 border border-indigo-500/40 text-indigo-300 hover:bg-indigo-500 hover:text-white transition-all duration-200 shadow-[0_0_15px_rgba(99,102,241,0.25)] relative z-10 tracking-tight"
+              className="text-xs font-bold px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white transition-all duration-200 shadow-md tracking-tight"
             >
               [ OPERATOR FILE ]
             </button>
@@ -174,26 +200,26 @@ export default function App() {
       </header>
 
       {/* HERO & CONTENT */}
-      <main className="max-w-6xl w-full mx-auto px-6 sm:px-16 py-12 sm:py-16 my-auto relative z-10 space-y-16">
+      <main className="max-w-6xl w-full mx-auto px-6 sm:px-16 pt-24 sm:pt-32 pb-12 sm:pb-16 my-auto relative z-10 space-y-16">
         
         {/* HERO SECTION */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-950/60 border border-purple-700/40 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
-            <p className="text-xs font-medium text-indigo-300 tracking-tight uppercase">ARCHITECTURE & DEFENSE SYSTEMS</p>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 shadow-sm mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+            <p className="text-[11px] font-bold text-emerald-800 tracking-wider uppercase">ARCHITECTURE & DEFENSE SYSTEMS</p>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight mb-6">
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight mb-6">
             Securing infrastructure at scale <br className="hidden sm:inline" />
-            with <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-purple-300 drop-shadow-[0_0_20px_rgba(165,180,252,0.4)]">clarity</span> and <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-indigo-300 drop-shadow-[0_0_20px_rgba(165,180,252,0.4)]">precision</span>.
+            with <span className="text-slate-900 underline decoration-emerald-500 decoration-4 underline-offset-4">clarity</span> and <span className="text-slate-900 underline decoration-emerald-500 decoration-4 underline-offset-4">precision</span>.
           </h1>
-          <p className="text-base text-slate-300 leading-relaxed max-w-2xl font-normal">
-            보안 플랫폼, 로그 탐지 파이프라인 및 자동화 대응 프레임워크 구축에 집중하는 보안 엔지니어 포트폴리오입니다.
+          <p className="text-base text-slate-600 leading-relaxed max-w-2xl font-normal">
+            포트폴리오
           </p>
         </div>
 
         {/* PROJECTS ARCHIVE LIST */}
         <div className="space-y-4">
-          <div className="flex justify-between items-center text-xs font-medium text-slate-400 pb-3 border-b border-purple-900/40 px-2 tracking-tight uppercase">
+          <div className="flex justify-between items-center text-xs font-extrabold text-slate-500 pb-3 border-b border-slate-200 px-2 tracking-wider uppercase">
             <span>PROJECTS // ARCHIVE</span>
             <span>SPECIFICATION & SCOPE</span>
           </div>
@@ -208,35 +234,37 @@ export default function App() {
                   setActiveProject(activeProject === idx ? null : idx);
                 }
               }}
-              className={`group p-6 sm:p-8 rounded-2xl border transition-all duration-300 relative overflow-hidden cursor-pointer ${
+              className={`group p-6 sm:p-7 rounded-xl border-2 transition-all duration-200 relative overflow-hidden cursor-pointer ${
                 item.isProfileLink 
-                  ? 'bg-[#17172E] border-indigo-400/90 shadow-[0_0_30px_rgba(99,102,241,0.3)] hover:shadow-[0_0_40px_rgba(99,102,241,0.45)] hover:border-indigo-300' 
+                  ? 'bg-slate-900 text-white border-slate-900 shadow-lg hover:bg-slate-800' 
                   : activeProject === idx 
-                    ? 'bg-[#221C35] border-purple-400/80 shadow-[0_10px_35px_rgba(168,85,247,0.25)]' 
-                    : 'bg-[#1A1528] border-purple-900/40 hover:border-purple-500/70 hover:bg-[#1E192F] hover:shadow-[0_0_25px_rgba(168,85,247,0.15)]'
+                    ? 'bg-white border-slate-900 shadow-md' 
+                    : 'bg-white border-slate-200 hover:border-emerald-600 hover:shadow-sm'
               }`}
             >
               {item.isProfileLink ? (
-                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-indigo-300 to-indigo-500 shadow-[0_0_12px_#818cf8]"></div>
+                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-emerald-500"></div>
               ) : activeProject === idx ? (
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-400 to-fuchsia-400 shadow-[0_0_12px_#c084fc]"></div>
+                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-slate-900"></div>
               ) : null}
 
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div className="flex items-center gap-4 sm:gap-5">
-                  <span className={`text-xs font-bold ${item.isProfileLink ? 'text-indigo-400' : 'text-purple-300'}`}>
+                  <span className={`text-xs font-mono font-bold ${item.isProfileLink ? 'text-slate-400' : 'text-slate-400'}`}>
                     {item.id}
                   </span>
                   
                   <div className="flex flex-wrap items-center gap-2.5">
-                    <span className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-md border tracking-tight ${
+                    <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded border tracking-tight ${
                       item.isProfileLink 
-                        ? 'bg-indigo-950/80 text-indigo-300 border-indigo-500/40' 
-                        : 'bg-purple-950/80 text-purple-300 border-purple-700/50'
+                        ? 'bg-emerald-500 text-slate-950 border-emerald-400' 
+                        : 'bg-emerald-50 text-emerald-800 border-emerald-200'
                     }`}>
                       {item.tag}
                     </span>
-                    <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-indigo-200 transition-colors">
+                    <h3 className={`text-base sm:text-lg font-bold transition-colors ${
+                      item.isProfileLink ? 'text-white group-hover:text-emerald-400' : 'text-slate-900 group-hover:text-emerald-700'
+                    }`}>
                       {item.title}
                     </h3>
                   </div>
@@ -244,25 +272,29 @@ export default function App() {
 
                 <div className="flex items-center justify-between md:justify-end gap-6">
                   {item.isProfileLink && (
-                    <span className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-indigo-500/20 text-indigo-200 border border-indigo-400/50 hover:bg-indigo-500/30 transition-all">
+                    <span className="text-xs font-bold px-3 py-1.5 rounded bg-emerald-500 text-slate-950 hover:bg-emerald-400 transition-all shadow-sm">
                       {item.buttonText}
                     </span>
                   )}
-                  <span className="hidden md:inline text-xs font-medium text-slate-300">{item.category}</span>
-                  <span className={`text-xs font-semibold px-3 py-1 rounded-md ${
+                  <span className={`hidden md:inline text-xs font-semibold ${item.isProfileLink ? 'text-slate-400' : 'text-slate-500'}`}>
+                    {item.category}
+                  </span>
+                  <span className={`text-xs font-mono font-bold px-2.5 py-1 rounded border ${
                     item.isProfileLink 
-                      ? 'text-indigo-200 bg-indigo-950/70 border border-indigo-500/50' 
-                      : 'text-fuchsia-200 bg-fuchsia-950/60 border border-fuchsia-700/50'
+                      ? 'text-slate-300 bg-slate-800 border-slate-700' 
+                      : 'text-slate-700 bg-slate-100 border-slate-200'
                   }`}>
                     {item.metrics}
                   </span>
-                  <span className="text-xs font-medium text-slate-400">{item.period}</span>
+                  <span className={`text-xs font-mono font-semibold ${item.isProfileLink ? 'text-slate-400' : 'text-slate-400'}`}>
+                    {item.period}
+                  </span>
                 </div>
               </div>
 
               {activeProject === idx && !item.isProfileLink && (
-                <div className="mt-6 pt-6 border-t border-purple-800/40 text-sm text-slate-200 leading-relaxed">
-                  <p className="max-w-3xl font-normal">{item.desc}</p>
+                <div className="mt-5 pt-5 border-t border-slate-200 text-sm text-slate-700 leading-relaxed">
+                  <p className="max-w-3xl font-medium">{item.desc}</p>
                 </div>
               )}
             </div>
@@ -270,68 +302,64 @@ export default function App() {
         </div>
 
         {/* AWARDS, ACTIVITIES & CERTIFICATIONS GRID */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-2">
           
           {/* AWARDS & HONORS */}
-          <div className="bg-[#1A1528] border border-purple-900/40 rounded-2xl p-6 space-y-5">
-            <div className="flex items-center gap-2 pb-3 border-b border-purple-900/40">
-              <span className="w-2 h-2 rounded-full bg-indigo-400"></span>
-              <h2 className="text-xs font-bold text-indigo-300 tracking-wider uppercase">AWARDS & HONORS // 수상 경력</h2>
+          <div className="bg-white border-2 border-slate-300 rounded-xl p-6 space-y-5 shadow-sm hover:border-slate-400 transition-all">
+            <div className="flex items-center gap-2 pb-3 border-b border-slate-200">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+              <h2 className="text-xs font-extrabold text-slate-900 tracking-wider uppercase">AWARDS & HONORS // 수상 경력</h2>
             </div>
 
             <div className="space-y-3">
               {awards.map((award, index) => (
-                <div key={index} className="bg-[#13111C]/80 border border-purple-900/30 hover:border-indigo-500/40 rounded-xl p-4 transition-all space-y-1">
-                  <div className="flex items-center justify-between gap-2">
-                    <h4 className="text-sm font-bold text-white tracking-tight">{award.title}</h4>
-                  </div>
-                  <p className="text-xs font-semibold text-indigo-300">{award.organization}</p>
-                  <p className="text-xs text-slate-400 leading-relaxed pt-1">{award.desc}</p>
+                <div key={index} className="bg-slate-50 border-2 border-slate-200 hover:border-slate-900 rounded-lg p-4 transition-all space-y-1.5 shadow-xs">
+                  <h4 className="text-sm font-bold text-slate-900 tracking-tight">{award.title}</h4>
+                  <p className="text-xs font-extrabold text-emerald-700">{award.organization}</p>
+                  <p className="text-xs text-slate-600 font-medium leading-relaxed pt-0.5">{award.desc}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* ACTIVITIES */}
-          <div className="bg-[#1A1528] border border-purple-900/40 rounded-2xl p-6 space-y-5">
-            <div className="flex items-center gap-2 pb-3 border-b border-purple-900/40">
-              <span className="w-2 h-2 rounded-full bg-purple-400"></span>
-              <h2 className="text-xs font-bold text-purple-300 tracking-wider uppercase">ACTIVITIES // 교내외 활동</h2>
+          <div className="bg-white border-2 border-slate-300 rounded-xl p-6 space-y-5 shadow-sm hover:border-slate-400 transition-all">
+            <div className="flex items-center gap-2 pb-3 border-b border-slate-200">
+              <span className="w-2.5 h-2.5 rounded-full bg-slate-900"></span>
+              <h2 className="text-xs font-extrabold text-slate-900 tracking-wider uppercase">ACTIVITIES // 교내외 활동</h2>
             </div>
 
             <div className="space-y-3">
               {activities.map((act, index) => (
-                <div key={index} className="bg-[#13111C]/80 border border-purple-900/30 hover:border-purple-500/40 rounded-xl p-4 transition-all space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <h4 className="text-sm font-bold text-white tracking-tight">{act.title}</h4>
-                  </div>
-                  <span className="inline-block text-[11px] font-semibold text-purple-300 bg-purple-950/60 border border-purple-800/40 px-2 py-0.5 rounded-md">
+                <div key={index} className="bg-slate-50 border-2 border-slate-200 hover:border-slate-900 rounded-lg p-4 transition-all space-y-2 shadow-xs">
+                  <h4 className="text-sm font-bold text-slate-900 tracking-tight">{act.title}</h4>
+                  <span className="inline-block text-[11px] font-bold text-slate-900 bg-slate-200 border border-slate-300 px-2.5 py-0.5 rounded">
                     {act.role}
                   </span>
-                  <p className="text-xs text-slate-400 leading-relaxed pt-1">{act.desc}</p>
+                  <p className="text-xs text-slate-600 font-medium leading-relaxed pt-0.5">{act.desc}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* CERTIFICATIONS */}
-          <div className="bg-[#1A1528] border border-purple-900/40 rounded-2xl p-6 space-y-5">
-            <div className="flex items-center gap-2 pb-3 border-b border-purple-900/40">
-              <span className="w-2 h-2 rounded-full bg-fuchsia-400"></span>
-              <h2 className="text-xs font-bold text-fuchsia-300 tracking-wider uppercase">CERTIFICATIONS // 자격증</h2>
+          <div className="bg-white border-2 border-slate-300 rounded-xl p-6 space-y-5 shadow-sm hover:border-slate-400 transition-all">
+            <div className="flex items-center gap-2 pb-3 border-b border-slate-200">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+              <h2 className="text-xs font-extrabold text-slate-900 tracking-wider uppercase">CERTIFICATIONS // 자격증</h2>
             </div>
 
-            <div className="flex flex-col gap-2.5">
+            <div className="flex flex-col gap-3">
               {profile.certifications.map((cert, index) => (
                 <div 
                   key={index} 
-                  className="bg-[#13111C]/80 border border-purple-900/40 hover:border-fuchsia-500/40 rounded-xl p-4 flex items-center justify-between transition-all group"
+                  className="bg-slate-50 border-2 border-slate-200 hover:border-emerald-600 rounded-lg p-4 flex items-center justify-between transition-all shadow-xs"
                 >
-                  <span className="text-xs font-bold text-slate-200 group-hover:text-white transition-colors">
+                  <span className="text-sm font-bold text-slate-900">
                     {cert}
                   </span>
-                  <span className="text-[10px] font-semibold text-fuchsia-400 bg-fuchsia-950/50 border border-fuchsia-800/40 px-2 py-0.5 rounded">
-                    CERTIFIED
+                  <span className="text-[11px] font-mono font-bold text-emerald-800 bg-emerald-100 border border-emerald-300 px-2.5 py-1 rounded">
+                    VERIFIED
                   </span>
                 </div>
               ))}
@@ -343,146 +371,140 @@ export default function App() {
 
       {/* OPERATOR PROFILE MODAL */}
       {isProfileModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto">
-          <div className="bg-[#18162A] border-2 border-indigo-400/80 rounded-2xl w-full max-w-4xl p-6 sm:p-10 shadow-[0_0_60px_rgba(99,102,241,0.3)] relative overflow-hidden my-auto max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/70 backdrop-blur-md overflow-y-auto">
+          <div className="bg-white rounded-2xl w-full max-w-3xl shadow-2xl relative overflow-hidden my-auto max-h-[90vh] flex flex-col border border-slate-200">
             
-            {/* Header */}
-            <div className="flex justify-between items-center border-b border-indigo-900/60 pb-5 mb-8">
+            {/* Modal Header */}
+            <div className="bg-slate-900 px-6 py-5 text-white flex justify-between items-center shrink-0 border-b border-slate-800">
               <div className="flex items-center gap-3">
-                <span className="w-3.5 h-3.5 rounded-full bg-indigo-400 animate-ping"></span>
-                <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-center gap-2">
-                  <span className="text-indigo-400">[OPERATOR FILE]</span> DETAILS
-                </h2>
+                <span className="w-3 h-3 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_rgba(52,211,153,0.8)]"></span>
+                <div>
+                  <h2 className="text-base font-extrabold tracking-tight text-white flex items-center gap-2">
+                    OPERATOR PROFILE
+                  </h2>
+                  <p className="text-[11px] text-slate-400 font-mono">ID: {profile.name.toUpperCase().replace(/\s+/g, '_')}</p>
+                </div>
               </div>
               <button 
                 onClick={() => setIsProfileModalOpen(false)}
-                className="text-slate-300 hover:text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-lg bg-indigo-950/50 hover:bg-indigo-900/60 border border-indigo-700/50 transition-all"
+                className="text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-700 transition-all cursor-pointer"
               >
-                [ CLOSE ESC ]
+                닫기 ✕
               </button>
             </div>
 
-            {/* Profile Form */}
-            <div className="space-y-6 text-sm">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {/* Modal Body */}
+            <div className="p-6 sm:p-8 space-y-7 overflow-y-auto text-slate-800">
+              
+              {/* Name & Role Header Card */}
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
-                  <label className="block text-indigo-300 font-semibold mb-2 text-xs tracking-tight uppercase">OPERATOR NAME</label>
-                  <input 
-                    type="text" 
-                    value={profile.name}
-                    onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-                    className="w-full bg-[#100E1C] border border-indigo-800/60 rounded-xl p-3.5 text-white text-base focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 transition-all shadow-inner"
-                  />
+                  <div className="text-xs font-mono font-bold text-emerald-600 uppercase tracking-wider mb-1">OPERATOR NAME</div>
+                  <div className="text-2xl font-black text-slate-900 tracking-tight">{profile.name}</div>
+                  <div className="text-sm font-bold text-emerald-700 mt-0.5">{profile.role}</div>
                 </div>
-                <div>
-                  <label className="block text-indigo-300 font-semibold mb-2 text-xs tracking-tight uppercase">CLEARANCE LEVEL</label>
-                  <input 
-                    type="text" 
-                    value={profile.clearance}
-                    onChange={(e) => setProfile({ ...profile, clearance: e.target.value })}
-                    className="w-full bg-[#100E1C] border border-indigo-800/60 rounded-xl p-3.5 text-indigo-300 font-bold text-base focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 transition-all shadow-inner"
-                  />
+                <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono font-bold px-3 py-1.5 rounded-lg shadow-2xs">
+                  {profile.clearance}
                 </div>
               </div>
 
-              {/* CONTACT & LINKS */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-indigo-300 font-semibold mb-2 text-xs tracking-tight uppercase">GITHUB REPOSITORY URL</label>
-                  <input 
-                    type="text" 
-                    value={profile.github}
-                    onChange={(e) => setProfile({ ...profile, github: e.target.value })}
-                    placeholder="https://github.com/..."
-                    className="w-full bg-[#100E1C] border border-indigo-800/60 rounded-xl p-3.5 text-indigo-200 font-mono text-sm focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 transition-all shadow-inner"
-                  />
-                </div>
-                <div>
-                  <label className="block text-indigo-300 font-semibold mb-2 text-xs tracking-tight uppercase">EMAIL ADDRESS</label>
-                  <input 
-                    type="email" 
-                    value={profile.email}
-                    onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-                    placeholder="name@domain.com"
-                    className="w-full bg-[#100E1C] border border-indigo-800/60 rounded-xl p-3.5 text-indigo-200 font-mono text-sm focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 transition-all shadow-inner"
-                  />
+              {/* Bio Section */}
+              <div>
+                <h3 className="text-xs font-extrabold text-emerald-700 uppercase tracking-wider mb-2.5 flex items-center gap-2">
+                  <span className="w-1.5 h-3.5 bg-emerald-500 rounded-xs inline-block"></span>
+                  SUMMARY & BIO
+                </h3>
+                <div className="bg-white border border-slate-200 rounded-xl p-4 text-sm font-medium text-slate-700 leading-relaxed shadow-xs">
+                  {profile.bio}
                 </div>
               </div>
 
+              {/* Technical Skills Badges (Categorized Tech Stacks) */}
               <div>
-                <label className="block text-indigo-300 font-semibold mb-2 text-xs tracking-tight uppercase">ROLE / PRIMARY FUNCTION</label>
-                <input 
-                  type="text" 
-                  value={profile.role}
-                  onChange={(e) => setProfile({ ...profile, role: e.target.value })}
-                  className="w-full bg-[#100E1C] border border-indigo-800/60 rounded-xl p-3.5 text-white text-base focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 transition-all shadow-inner"
-                />
+                <h3 className="text-xs font-extrabold text-emerald-700 uppercase tracking-wider mb-3 flex items-center gap-2">
+                  <span className="w-1.5 h-3.5 bg-emerald-500 rounded-xs inline-block"></span>
+                  TECHNICAL SKILLS <span className="text-emerald-400">//</span> TECH STACKS
+                </h3>
+                <div className="space-y-4 bg-slate-50/80 border border-slate-200 rounded-xl p-5">
+                  {profile.skillCategories.map((group, groupIdx) => (
+                    <div key={groupIdx} className="space-y-2">
+                      <div className="text-[11px] font-bold text-emerald-800 tracking-wide uppercase flex items-center gap-1.5">
+                        <span className="text-emerald-500 font-mono">›</span>
+                        {group.category}
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {group.items.map((skill, skillIdx) => (
+                          <span 
+                            key={skillIdx}
+                            className="bg-white hover:bg-emerald-50 text-slate-800 hover:text-emerald-900 border border-slate-300 hover:border-emerald-400 font-bold text-xs px-3 py-1.5 rounded-lg transition-colors shadow-2xs"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
+              {/* Certifications */}
               <div>
-                <label className="block text-indigo-300 font-semibold mb-2 text-xs tracking-tight uppercase">SUMMARY & BIO</label>
-                <textarea 
-                  rows={4}
-                  value={profile.bio}
-                  onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
-                  className="w-full bg-[#100E1C] border border-indigo-800/60 rounded-xl p-3.5 text-slate-100 text-base focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 transition-all shadow-inner leading-relaxed"
-                />
+                <h3 className="text-xs font-extrabold text-emerald-700 uppercase tracking-wider mb-2.5 flex items-center gap-2">
+                  <span className="w-1.5 h-3.5 bg-emerald-500 rounded-xs inline-block"></span>
+                  CERTIFICATIONS
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {profile.certifications.map((cert, index) => (
+                    <div key={index} className="bg-emerald-50/50 border border-emerald-200 rounded-xl p-3.5 flex justify-between items-center shadow-2xs">
+                      <span className="text-xs font-bold text-slate-900">{cert}</span>
+                      <span className="text-[10px] font-mono font-bold text-emerald-700 bg-emerald-100 border border-emerald-300 px-2 py-0.5 rounded">VERIFIED</span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
+              {/* Contact Links */}
               <div>
-                <label className="block text-indigo-300 font-semibold mb-2 text-xs tracking-tight uppercase">TECHNICAL SKILLS (COMMA SEPARATED)</label>
-                <input 
-                  type="text" 
-                  value={profile.skills.join(', ')}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => 
-                    setProfile({ 
-                      ...profile, 
-                      skills: e.target.value.split(',').map((s) => s.trim()) 
-                    })
-                  }
-                  className="w-full bg-[#100E1C] border border-indigo-800/60 rounded-xl p-3.5 text-white text-base focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 transition-all shadow-inner"
-                />
+                <h3 className="text-xs font-extrabold text-emerald-700 uppercase tracking-wider mb-2.5 flex items-center gap-2">
+                  <span className="w-1.5 h-3.5 bg-emerald-500 rounded-xs inline-block"></span>
+                  CONTACT & LINKS
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <a 
+                    href={profile.github} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="flex items-center justify-between bg-slate-50 hover:bg-emerald-50/40 border border-slate-200 hover:border-emerald-300 p-3.5 rounded-xl transition-all group"
+                  >
+                    <div>
+                      <div className="text-[10px] font-mono font-bold text-emerald-600">GITHUB REPOSITORY</div>
+                      <div className="text-xs font-bold text-slate-900 truncate max-w-[200px]">{profile.github}</div>
+                    </div>
+                    <span className="text-xs font-bold text-slate-400 group-hover:text-emerald-700 transition-colors">↗</span>
+                  </a>
+
+                  <a 
+                    href={`mailto:${profile.email}`} 
+                    className="flex items-center justify-between bg-slate-50 hover:bg-emerald-50/40 border border-slate-200 hover:border-emerald-300 p-3.5 rounded-xl transition-all group"
+                  >
+                    <div>
+                      <div className="text-[10px] font-mono font-bold text-emerald-600">EMAIL ADDRESS</div>
+                      <div className="text-xs font-bold text-slate-900">{profile.email}</div>
+                    </div>
+                    <span className="text-xs font-bold text-slate-400 group-hover:text-emerald-700 transition-colors">↗</span>
+                  </a>
+                </div>
               </div>
 
-              <div>
-                <label className="block text-indigo-300 font-semibold mb-2 text-xs tracking-tight uppercase">CERTIFICATIONS (COMMA SEPARATED)</label>
-                <input 
-                  type="text" 
-                  value={profile.certifications.join(', ')}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => 
-                    setProfile({ 
-                      ...profile, 
-                      certifications: e.target.value.split(',').map((s) => s.trim()) 
-                    })
-                  }
-                  className="w-full bg-[#100E1C] border border-indigo-800/60 rounded-xl p-3.5 text-white text-base focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 transition-all shadow-inner"
-                />
-              </div>
             </div>
 
-            {/* Footer */}
-            <div className="mt-10 pt-6 border-t border-indigo-900/60 flex flex-col sm:flex-row justify-between items-center gap-4">
-              <div className="flex items-center gap-3">
-                <a 
-                  href={profile.github} 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className="text-xs text-indigo-300 hover:text-white underline font-mono"
-                >
-                  [ GITHUB LINK ]
-                </a>
-                <a 
-                  href={`mailto:${profile.email}`} 
-                  className="text-xs text-indigo-300 hover:text-white underline font-mono"
-                >
-                  [ CONTACT EMAIL ]
-                </a>
-              </div>
+            {/* Modal Footer */}
+            <div className="bg-slate-50 px-6 py-4 border-t border-slate-200 flex justify-end shrink-0">
               <button 
                 onClick={() => setIsProfileModalOpen(false)}
-                className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 text-white font-bold text-sm hover:brightness-110 transition-all shadow-[0_0_25px_rgba(99,102,241,0.4)]"
+                className="px-5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-all shadow-md cursor-pointer"
               >
-                SAVE PROFILE DATA
+                닫기
               </button>
             </div>
 
@@ -491,15 +513,15 @@ export default function App() {
       )}
 
       {/* FOOTER */}
-      <footer className="border-t border-purple-900/30 px-6 sm:px-16 py-8 relative z-10">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-medium text-slate-400">
+      <footer className="border-t border-slate-200 bg-white px-6 sm:px-16 py-6 relative z-10">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500 font-semibold">
           <div className="flex items-center gap-4">
-            <span>{profile.name} — SECURITY PORTFOLIO</span>
-            <a href={profile.github} target="_blank" rel="noreferrer" className="hover:text-indigo-300 transition-colors">GitHub</a>
-            <a href={`mailto:${profile.email}`} className="hover:text-indigo-300 transition-colors">Email</a>
+            <span className="text-slate-900 font-bold">{profile.name} — SECURITY PORTFOLIO</span>
+            <a href={profile.github} target="_blank" rel="noreferrer" className="hover:text-slate-900 transition-colors">GitHub</a>
+            <a href={`mailto:${profile.email}`} className="hover:text-slate-900 transition-colors">Email</a>
           </div>
-          <span className="text-indigo-300 flex items-center gap-2 font-semibold">
-            <span className="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+          <span className="text-slate-700 flex items-center gap-2 font-mono font-bold">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
             SYSTEM STATUS: OPERATIONAL
           </span>
         </div>

@@ -136,10 +136,10 @@ body {
 }
 
 /* 안정적인 macOS 스타일 커서 (오류 일으키던 전역 *:hover 제거) */
-html, body {
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="white" stroke="%230F172A" stroke-width="2"><path d="M3 3l7 18 3-7 7-3L3 3z"/></svg>') 0 0, auto;
-}
-
-a, button, input, select, textarea, [role="button"], [onclick], label {
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="%230F172A" stroke="white" stroke-width="1.5"><path d="M3 3l7 18 3-7 7-3L3 3z"/></svg>') 0 0, pointer !important;
+html, body, *, 
+a, button, input, select, textarea, 
+[role="button"], [onclick], label,
+a:hover, button:hover, input:hover, select:hover, textarea:hover,
+[role="button"]:hover, [onclick]:hover, label:hover {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="white" stroke="%230F172A" stroke-width="2"><path d="M3 3l7 18 3-7 7-3L3 3z"/></svg>') 0 0, default !important;
 }

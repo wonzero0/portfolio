@@ -1,7 +1,10 @@
+/* 1. 모든 @import 구문은 최상단에 연속으로 배치 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
 @import 'tailwindcss';
 
+/* 2. Tailwind Theme 설정 */
 @theme inline {
   --color-background: #0D1117;
   --color-surface: #111827;
@@ -22,7 +25,8 @@
   --color-border: #30363D;
   --color-border-bright: #8B949E;
 
-  --font-sans: 'Inter', system-ui, sans-serif;
+  /* Pretendard를 기본 sans 폰트로 지정 */
+  --font-sans: 'Pretendard', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
@@ -34,12 +38,13 @@ html, body, #root {
 
 * {
   box-sizing: border-box;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
 }
 
 body {
   background: #0D1117;
   color: #F0F6FC;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -135,7 +140,7 @@ body {
   border-color: #800020 !important;
 }
 
-/* 안정적인 macOS 스타일 커서 (오류 일으키던 전역 *:hover 제거) */
+/* 안정적인 macOS 스타일 커서 */
 html, body, *, 
 a, button, input, select, textarea, 
 [role="button"], [onclick], label,

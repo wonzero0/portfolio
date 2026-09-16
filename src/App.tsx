@@ -118,7 +118,7 @@ export default function Portfolio() {
       techStack: ['Docker', 'Docker Compose', 'MediaMTX', 'RTSP/RTSPS', 'FFmpeg', 'OpenSSL', 'Python', 'OpenCV', 'Socket', 'Scapy', 'Wireshark', 'Nmap'],
       impact: '단독 수행 100% | Red Team 모의해킹 시나리오 자동화 성공 및 RTSPS TLS 핸드셰이크 패킷 암호화 검증. Wireshark MITM 공격 방어 검증 완료. 경량화 검증(CPU ~1.52%, RAM ~9.79MB 사용으로 IoT Edge 기기 운용 가능성 증명)',
       githubUrl: 'https://github.com/wonzero0/smart_home_security_project.git',
-      pptUrl: 'https://github.com/wonzero0/smart_home_security_project#readme',
+      pptUrl: 'https://app.notion.com/p/3a75b40dd148806eb02adac44831cd2f?source=copy_link',
       keyHighlights: ['RTSPS over TLS 구현', '실시간 Python IDS 연동', 'Edge Device 경량화 검증 (CPU < 2%)']
     },
     {
@@ -156,7 +156,7 @@ export default function Portfolio() {
       ],
       techStack: ['Python', 'FastAPI', 'TourAPI (한국관광공사)', 'Open Data API', 'JSON RESTful API', 'MySQL', 'React Native', 'Vibe Coding AI'],
       impact: '데이터 API 및 관광 공공데이터 백엔드 담당 | TourAPI 공공 데이터 연동 API 구축 및 J/P형 여행 성향별 추천 데이터 파이프라인 완성. 2026 관광데이터 활용 공모전 출품 및 바이브코딩 초단기 프로토타이핑 달성',
-      githubUrl: 'https://github.com/wonzero0',
+      githubUrl: 'https://github.com/wonzero0/momentrip.git',
       pptUrl: 'https://github.com/wonzero0',
       keyHighlights: ['2026 관광데이터 활용 공모전 출품', '한국관광공사 TourAPI 데이터 연동', 'J/P 여행 성향별 미션 추천']
     },

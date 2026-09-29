@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowDown, Folder, ArrowLeft, Check, FileText, ArrowUpRight, Cpu, Layers } from 'lucide-react';
+import { ArrowDown, Folder, ArrowLeft, Check, FileText, ArrowUpRight } from 'lucide-react';
 
 const GithubIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-    <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+    <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64 7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
   </svg>
 );
 
@@ -84,12 +84,30 @@ export default function Portfolio() {
 
   const items: DirectoryItem[] = [
     {
+      id: 'musinsa-privacy',
+      type: 'project',
+      category: 'Privacy & Security Audit',
+      title: '무신사(MUSINSA) 개인정보 보호수준 진단 프로젝트',
+      subtitle: 'KISA ISMS-P 인증기준(영역 3) 및 개인정보 보호법 기반 이커머스 서비스 보안·개인정보 진단',
+      summary: '국내 대표 패션 이커머스 플랫폼인 무신사(MUSINSA)의 웹 및 모바일 환경을 대상으로 수집·동의, 암호화·송수신, 이용자 권리·파기, 도메인 특화 4개 영역 13개 항목에 대해 ISMS-P 기준 규제 준수 여부를 종합 진단하고 개선 가이드를 수립한 프로젝트입니다.',
+      problem: '대규모 사용자 및 다수 입점 브랜드를 보유한 이커머스 서비스 특성상, 개인정보 수집 구분 모호성, 제3자 제공 및 위수탁 처리 구분의 명확성, 전송 구간 패킷 노출 위험, 법적 파기/분리보관 조항 명시 미비 등 컴플라이언스 및 데이터 유출 리스크 존재.',
+      technicalApproach: [
+        { tag: '진단 프레임워크', text: 'KISA ISMS-P 인증기준 (영역 3. 개인정보 처리단계별 보호) 및 개인정보 보호법 조항에 입각한 13개 세부 점검 항목 설계.' },
+        { tag: '트래픽 & 패킷 분석', text: 'Wireshark 및 개발자 도구를 활용한 TLS 전송 구간 암호화 강제, HSTS 적용, 요청 바디(Body) 내 평문 노출 여부 및 인증 토큰 보관 상태 실무 점검.' },
+        { tag: '약관 및 서비스 진단', text: '회원가입/주문/탈퇴 UI·UX 내 필수/선택 수집 구획 Visual 구분, 래플/커뮤니티 ID 마스킹, PG사 토큰화 결제 구조 및 분리보관 약관 종합 평가.' }
+      ],
+      techStack: ['ISMS-P', '개인정보 보호법', 'Wireshark', 'HSTS / TLS 1.3', 'Web/Mobile Traffic Audit'],
+      impact: '진단 수행 100% | 총 13개 항목 중 양호 11건, 개선권고 2건 도출 (필수/선택 수집 시각적 구획 강화 및 파기 시 별도 분리보관 조항 명시 조치 가이드라인 제시)',
+      pptUrl: 'https://catkin-locket-f2d.notion.site/MUSINSA-3ea5b40dd148800c9188d34dd9dc8bc4?source=copy_link',
+      keyHighlights: ['KISA ISMS-P 영역 3 기반 진단', '네트워크 전송구간 패킷 보안 검증', '개선권고 2건 및 이행 조치 가이드 수립']
+    },
+    {
       id: 'singpick',
       type: 'project',
       category: 'Capstone Design',
       title: 'Sing Pick! : AI 기반 퍼스널 노래 추천 노래방 부스',
       subtitle: '사용자 음색·음역대 분석 기반 맞춤형 곡 매칭 및 실시간 피드백 스마트 시스템',
-      summary: '"당신에게 가장 잘 어울리는 가수와 곡을 찾아드립니다." 2개 라즈베리파이 4 노드 분산 환경 기반의 AI 음성 분석 및 통합 제어 노래방 부스 시스템입니다.',
+      summary: '"당신에게 가장 잘 어울리는 가수와 곡을 찾아드립니다." [사용자 음성 녹음 ➔ AI 음색/음역대 분석 ➔ 맞춤 곡 추천 및 LED/디스플레이 피드백]으로 이어지는 2개 라즈베리파이 4 노드 분산 환경 기반 스마트 노래방 부스 시스템입니다.',
       problem: '인기 차트 위주의 일률적 선곡과 일회성 단순 점수 피드백에 머무르는 기존 노래방 시스템의 한계, 그리고 단일 노드 환경에서 실시간 음성 분석 처리 시 발생하는 프로세스 과부하 문제.',
       technicalApproach: [
         { tag: '분산 아키텍처', text: 'FastAPI 백엔드와 라즈베리파이 기반 HW 제어 유닛(RPi OS, 아두이노 LED 연동) 및 독립된 AI 분석 엔진(PyTorch, Resemblyzer, Librosa) 노드 분리 구축.' },
@@ -168,10 +186,10 @@ export default function Portfolio() {
       subtitle: '교내외 경진대회 및 공모전 수상 성과',
       summary: '캡스톤디자인, ICT 경진대회, 페이크보이스 공모전 등 다양한 분야에서의 수상 내역입니다.',
       itemsList: [
-        { date: '2026.08', title: '교내 RISE사업단 캡스톤디자인 경진대회', desc: 'Sing Pick! (AI 음성 분석 및 임베디드 분산 시스템)', badge: '우수상' },
-        { date: '2024.12', title: '교내 캡스톤디자인 경진대회', desc: 'SLAM 기반 로봇팔 활용 자율주행 시스템', badge: '우수상' },
-        { date: '2024.12', title: 'ICT 경진대회', desc: '하드웨어 조립 및 제출 서류 작성 주도 (팀 프로젝트)', badge: '특별상' },
-        { date: '2024.06', title: '교내 페이크보이스 아이디어 공모전', desc: '음성 합성 탐지 및 검증 메커니즘 제안', badge: '장려상' }
+        { date: '2026.08', title: '2026학년도 1학기 캡스톤디자인 경진대회', desc: 'Sing Pick! (AI 음성 분석 및 임베디드 분산 시스템)', badge: '우수상' },
+        { date: '2024.12', title: '2024 캡스톤디자인 MMSD 경진대회', desc: 'SLAM 기반 로봇팔 활용 자율주행 시스템', badge: '우수상' },
+        { date: '2024.12', title: '충북 ICT 경진대회', desc: '하드웨어 조립 및 제출 서류 작성 주도 (팀 프로젝트)', badge: '특별상' },
+        { date: '2024.06', title: '2024 SCHU 디지털 아이디어 해커톤', desc: '음성 합성 탐지 및 검증 메커니즘 제안', badge: '장려상' }
       ]
     },
     {
@@ -307,7 +325,7 @@ export default function Portfolio() {
                 </p>
               </div>
 
-              {/* 7개 폴더 카드의 그리드 레이아웃 */}
+              {/* 8개 폴더 카드의 그리드 레이아웃 */}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {items.map((item) => (
                   <button
@@ -418,7 +436,7 @@ export default function Portfolio() {
               </div>
             )}
 
-            {/* 프로젝트 상세 (2-Column Grid: Left: Problem/Approach/Impact, Right: Visual/Highlights/README Card) */}
+            {/* 프로젝트 상세 (2-Column Grid: Left: Problem/Approach/Impact, Right: Highlights/README Card) */}
             {selectedItem.type === 'project' && (
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-2">
                 
@@ -473,28 +491,6 @@ export default function Portfolio() {
                 {/* Right Column (5 cols) */}
                 <div className="lg:col-span-5 space-y-5">
                   
-                  {/* Visual / Architecture Diagram Card */}
-                  <div className="p-4 rounded-2xl bg-white border border-zinc-300/80 shadow-sm space-y-2">
-                    <div className="text-xs font-mono font-bold text-zinc-500 uppercase flex items-center justify-between">
-                      <span className="flex items-center gap-1.5"><Layers className="w-3.5 h-3.5 text-[#580A14]" /> Architecture / Visual</span>
-                      <span>Diagram</span>
-                    </div>
-
-                    {selectedItem.architectureImage ? (
-                      <div className="rounded-xl overflow-hidden border border-zinc-200">
-                        <img src={selectedItem.architectureImage} alt="Architecture" className="w-full object-cover" />
-                      </div>
-                    ) : (
-                      <div className="h-40 border border-dashed border-zinc-300 rounded-xl bg-zinc-50 flex flex-col items-center justify-center p-4 text-center space-y-2">
-                        <Cpu className="w-7 h-7 text-[#580A14] opacity-60" />
-                        <div className="text-xs font-mono font-bold text-zinc-800">SYSTEM ARCHITECTURE SCHEMATIC</div>
-                        <p className="text-[11px] text-zinc-500">
-                          상세 아키텍처 및 모듈 다이어그램은 GitHub 리드미에 상세 기술되어 있습니다.
-                        </p>
-                      </div>
-                    )}
-                  </div>
-
                   {/* Key Highlights */}
                   {selectedItem.keyHighlights && (
                     <div className="p-4 rounded-2xl bg-white border border-zinc-300/80 shadow-sm space-y-2">
@@ -514,14 +510,14 @@ export default function Portfolio() {
                   <div className="p-5 rounded-2xl bg-gradient-to-br from-zinc-900 to-zinc-800 text-white space-y-3 shadow-md relative overflow-hidden">
                     <div className="flex items-center gap-2 text-xs font-mono text-rose-300">
                       <FileText className="w-4 h-4" />
-                      <span>DOCUMENTATION & PPT</span>
+                      <span>DOCUMENTATION & REPORT</span>
                     </div>
 
                     <h4 className="text-sm font-bold text-white">
-                      상세 발표 자료 및 리드미 (README.md)
+                      상세 진단 보고서 (Notion / PDF)
                     </h4>
                     <p className="text-xs text-zinc-400 leading-relaxed">
-                      구체적인 회로 구성도, 실행 화면, 알고리즘 플로우는 GitHub 저장소의 README 문서를 참고해 주세요.
+                      구체적인 점검 항목별 상세 평가, 패킷 분석 데이터, 개선 권고 가이드라인은 공유 문서를 참고해 주세요.
                     </p>
 
                     {selectedItem.pptUrl && (
@@ -531,7 +527,7 @@ export default function Portfolio() {
                         rel="noreferrer"
                         className="inline-flex items-center justify-between w-full px-4 py-2.5 rounded-xl bg-[#580A14] hover:bg-rose-900 text-white text-xs font-mono font-bold transition-all shadow-md"
                       >
-                        <span>READ FULL README / PPT</span>
+                        <span>READ FULL REPORT</span>
                         <ArrowUpRight className="w-4 h-4" />
                       </a>
                     )}

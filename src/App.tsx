@@ -175,7 +175,7 @@ export default function Portfolio() {
       techStack: ['Python', 'FastAPI', 'TourAPI (한국관광공사)', 'Open Data API', 'JSON RESTful API', 'MySQL', 'React Native', 'Vibe Coding AI'],
       impact: '데이터 API 및 관광 공공데이터 백엔드 담당 | TourAPI 공공 데이터 연동 API 구축 및 J/P형 여행 성향별 추천 데이터 파이프라인 완성. 2026 관광데이터 활용 공모전 출품 및 바이브코딩 초단기 프로토타이핑 달성',
       githubUrl: 'https://github.com/wonzero0/momentrip.git',
-      pptUrl: 'https://github.com/wonzero0',
+      pptUrl: 'https://catkin-locket-f2d.notion.site/MomenTrip-3ea5b40dd14880c7bf0cd0ed4e86c203?source=copy_link',
       keyHighlights: ['2026 관광데이터 활용 공모전 출품', '한국관광공사 TourAPI 데이터 연동', 'J/P 여행 성향별 미션 추천']
     },
     {
@@ -187,8 +187,8 @@ export default function Portfolio() {
       summary: '캡스톤디자인, ICT 경진대회, 페이크보이스 공모전 등 다양한 분야에서의 수상 내역입니다.',
       itemsList: [
         { date: '2026.08', title: '2026학년도 1학기 캡스톤디자인 경진대회', desc: 'Sing Pick! (AI 음성 분석 및 임베디드 분산 시스템)', badge: '우수상' },
-        { date: '2024.12', title: '2024 캡스톤디자인 MMSD 경진대회', desc: 'SLAM 기반 로봇팔 활용 자율주행 시스템', badge: '우수상' },
-        { date: '2024.12', title: '충북 ICT 경진대회', desc: '하드웨어 조립 및 제출 서류 작성 주도 (팀 프로젝트)', badge: '특별상' },
+        { date: '2024.12', title: '2024 캡스톤디자인 MMSD 경진대회', desc: 'SLAM 기반 로봇팔 활용 자율주행 시스템 팀프로젝트의 하드웨어 조립 및 제출 서류 작성 주도', badge: '우수상' },
+        { date: '2024.12', title: '충북 ICT 경진대회', desc: 'SLAM 기반 로봇팔 활용 자율주행 시스템 팀프로젝트의 하드웨어 조립 및 제출 서류 작성 주도', badge: '특별상' },
         { date: '2024.06', title: '2024 SCHU 디지털 아이디어 해커톤', desc: '음성 합성 탐지 및 검증 메커니즘 제안', badge: '장려상' }
       ]
     },

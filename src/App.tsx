@@ -64,15 +64,15 @@ export default function Portfolio() {
       if (isScrolling.current) return;
 
       if (e.deltaY > 30) {
-        if (currentPage === 0) {
+        if (currentPage < 2) {
           isScrolling.current = true;
-          setCurrentPage(1);
+          setCurrentPage((prev) => prev + 1);
           setTimeout(() => { isScrolling.current = false; }, 700);
         }
       } else if (e.deltaY < -30) {
-        if (currentPage === 1) {
+        if (currentPage > 0) {
           isScrolling.current = true;
-          setCurrentPage(0);
+          setCurrentPage((prev) => prev - 1);
           setTimeout(() => { isScrolling.current = false; }, 700);
         }
       }
@@ -82,7 +82,26 @@ export default function Portfolio() {
     return () => window.removeEventListener('wheel', handleWheel);
   }, [currentPage, selectedItem]);
 
-  const items: DirectoryItem[] = [
+  // 2페이지 프로젝트 항목
+  const projects: DirectoryItem[] = [
+    {
+      id: 'altoro-pentest',
+      type: 'project',
+      category: 'Web Penetration Testing',
+      title: 'Altoro Mutual Web 모의해킹 및 웹 취약점 진단 프로젝트',
+      subtitle: 'OWASP Top 10 및 KISA 가이드 기반 뱅킹 웹 애플리케이션 모의해킹 및 대응 방안 수립',
+      summary: '온라인 뱅킹 웹 서비스(Altoro Mutual)를 대상으로 실제 공격자 관점에서 취약점을 식별·분석하고, 보안 수준 향상을 위한 대응 가이드를 수립한 웹 모의해킹 프로젝트입니다.',
+      problem: '금융 웹 서비스 특성상 계정 무차별 대입, 입력값 검증 미흡으로 인한 SQL Injection/XSS, CSRF 기반 무단 이체, 세션/쿠키 관리 미흡 및 평문 전송(HTTP) 등 복합적인 취약점으로 인해 서비스 신뢰도 저하 및 자산 유출 위험 존재.',
+      technicalApproach: [
+        { tag: '취약점 분석 & 침투 테스트', text: 'Burp Suite, Nmap, DirBuster, sqlmap 등을 활용하여 웹 애플리케이션 및 REST API 구간 진단.' },
+        { tag: '취약점 식별 & 검증', text: 'SQLi를 통한 관리자 인증 우회, CSRF/Race Condition 기반 계좌 이체 조작, Path Traversal을 통한 주요 설정 파일(web.xml) 열람 및 Stored/Reflected XSS 취약점 검증.' },
+        { tag: '전송 구간 보안 점검', text: 'HTTP 평문 전송 자격증명 노출 확인 및 TLSv1.0/1.1 약한 암호화 알고리즘 지원 상태 분석.' }
+      ],
+      techStack: ['Burp Suite', 'Nmap', 'DirBuster', 'sqlmap', 'OWASP Top 10', 'Web Penetration Testing', 'REST API Audit'],
+      impact: '총 25건의 보안 취약점 도출 (SQLi, CSRF, Race Condition, Path Traversal, HTTP 평문 전송 등) | 항목별 상세 정밀 보고서 및 보안 조치 이행 가이드 작성 완료',
+      pptUrl: 'https://catkin-locket-f2d.notion.site/Altoro-Mutual-Web-3ea5b40dd148802fac83e16616c4d759?source=copy_link',
+      keyHighlights: ['OWASP Top 10 기반 취약점 진단', '총 25건 보안 취약점 도출', 'CSRF 및 Race Condition 이체 조작 검증']
+    },
     {
       id: 'musinsa-privacy',
       type: 'project',
@@ -136,7 +155,7 @@ export default function Portfolio() {
       techStack: ['Docker', 'Docker Compose', 'MediaMTX', 'RTSP/RTSPS', 'FFmpeg', 'OpenSSL', 'Python', 'OpenCV', 'Socket', 'Scapy', 'Wireshark', 'Nmap'],
       impact: '단독 수행 100% | Red Team 모의해킹 시나리오 자동화 성공 및 RTSPS TLS 핸드셰이크 패킷 암호화 검증. Wireshark MITM 공격 방어 검증 완료. 경량화 검증(CPU ~1.52%, RAM ~9.79MB 사용으로 IoT Edge 기기 운용 가능성 증명)',
       githubUrl: 'https://github.com/wonzero0/smart_home_security_project.git',
-      pptUrl: 'https://app.notion.com/p/3a75b40dd148806eb02adac44831cd2f?source=copy_link',
+      pptUrl: 'https://catkin-locket-f2d.notion.site/3a75b40dd148806eb02adac44831cd2f?source=copy_link',
       keyHighlights: ['RTSPS over TLS 구현', '실시간 Python IDS 연동', 'Edge Device 경량화 검증 (CPU < 2%)']
     },
     {
@@ -177,7 +196,11 @@ export default function Portfolio() {
       githubUrl: 'https://github.com/wonzero0/momentrip.git',
       pptUrl: 'https://catkin-locket-f2d.notion.site/MomenTrip-3ea5b40dd14880c7bf0cd0ed4e86c203?source=copy_link',
       keyHighlights: ['2026 관광데이터 활용 공모전 출품', '한국관광공사 TourAPI 데이터 연동', 'J/P 여행 성향별 미션 추천']
-    },
+    }
+  ];
+
+  // 3페이지 교내외 활동, 수상 및 자격증 항목
+  const extraItems: DirectoryItem[] = [
     {
       id: 'awards',
       type: 'awards',
@@ -203,7 +226,7 @@ export default function Portfolio() {
         { date: '2023.03 - 2025.12', title: '단과대학 학생회 (3년 연속 활동)', desc: '단과대학 사무차장(1년) → 사무국장(1년) → 부회장(1년) 역임' },
         { date: '2024.03 - 2024.12', title: '학과 1학년 SRC 멘토링', desc: '선배-새내기 연결 멘토링 프로그램 1년 간 멘토로 활동' },
         { date: '2024.07', title: '교외 DACON 경진대회', desc: '아이디어 직접 머신러닝/딥러닝 파이프라인 모델로 구현 및 모델링 도전' },
-        { date: '2025.03 - 2025.12', title: 'SW중심대학사업단 AI교육봉사단 1기', desc: '초등학생 및 취약계층 대상 맞춤형 AI·SW 교육 봉사 활동 수행'}
+        { date: '2025.03 - 2025.12', title: 'SW중심대학사업단 AI교육봉사단 1기', desc: '초등학생 및 취약계층 대상 맞춤형 AI·SW 교육 봉사 활동 수행' }
       ]
     },
     {
@@ -256,6 +279,12 @@ export default function Portfolio() {
               className={`hover:text-[#580A14] transition-colors ${currentPage === 1 ? 'text-[#580A14] font-bold' : ''}`}
             >
               PROJECTS
+            </button>
+            <button 
+              onClick={() => setCurrentPage(2)} 
+              className={`hover:text-[#580A14] transition-colors ${currentPage === 2 ? 'text-[#580A14] font-bold' : ''}`}
+            >
+              EXPERIENCE
             </button>
             <a 
               href={GITHUB_PROFILE} 
@@ -325,9 +354,9 @@ export default function Portfolio() {
                 </p>
               </div>
 
-              {/* 8개 폴더 카드의 그리드 레이아웃 */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {items.map((item) => (
+              {/* 6개 프로젝트 폴더 카드의 그리드 레이아웃 */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                {projects.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => setSelectedItem(item)}
@@ -335,6 +364,74 @@ export default function Portfolio() {
                   >
                     <div className="my-auto relative">
                       <Folder className="w-20 h-20 text-sky-500 fill-sky-500/20 group-hover:scale-110 group-hover:text-sky-600 transition-transform duration-300" />
+                    </div>
+                    
+                    <div className="w-full space-y-1 pt-3 border-t border-zinc-200">
+                      <span className="text-xs font-mono text-[#580A14] block font-bold tracking-wider">
+                        {item.category}
+                      </span>
+                      <h3 className="text-sm sm:text-base font-bold text-zinc-900 group-hover:text-[#580A14] transition-colors line-clamp-1">
+                        {item.title}
+                      </h3>
+                    </div>
+                  </button>
+                ))}
+              </div>
+
+            </div>
+
+            <footer className="max-w-6xl mx-auto w-full pt-6 border-t border-zinc-300/80 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] font-mono text-zinc-600">
+              <div>© 2026 YEOM WONYOUNG. ALL RIGHTS RESERVED.</div>
+              <div className="flex items-center gap-3">
+                <a 
+                  href={GITHUB_PROFILE} 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="px-4 py-1.5 rounded-full border border-zinc-800/80 bg-transparent text-zinc-900 font-bold hover:bg-zinc-900 hover:text-zinc-100 transition shadow-sm"
+                >
+                  GITHUB
+                </a>
+                
+                <button 
+                  onClick={handleContactClick}
+                  className="px-4 py-1.5 rounded-full border border-zinc-800/80 bg-transparent text-zinc-900 font-bold hover:bg-zinc-900 hover:text-zinc-100 transition shadow-sm cursor-pointer"
+                >
+                  EMAIL
+                </button>
+              </div>
+            </footer>
+          </section>
+
+          {/* 3PAGE: ACTIVITIES, AWARDS & CERTIFICATIONS */}
+          <section className="w-full h-full bg-zinc-200/95 text-zinc-900 border-t border-zinc-300/80 px-6 sm:px-12 py-8 flex flex-col justify-between overflow-y-auto">
+            <div className="max-w-6xl mx-auto w-full space-y-8 my-auto">
+              
+              <div className="flex flex-col gap-2 border-b border-zinc-300/80 pb-4">
+                <div className="flex items-center gap-3 text-xs font-mono text-[#580A14] tracking-widest font-bold">
+                  <span>03</span>
+                  <span className="w-8 h-px bg-[#580A14]"></span>
+                  <span>EXPERIENCE & CREDENTIALS</span>
+                </div>
+                
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-[#580A14] tracking-tight">
+                  Activities, Awards & Certifications
+                </h2>
+                
+                <p className="text-xs text-zinc-600 font-mono">
+                  * 폴더를 클릭하면 해당 항목의 상세 내용 페이지가 열립니다.
+                </p>
+              </div>
+
+              {/* 3개 교내외 활동/수상/자격증 카드의 그리드 레이아웃 */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                {extraItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => setSelectedItem(item)}
+                    className="group flex flex-col items-center justify-between p-6 rounded-2xl bg-zinc-100/80 border border-zinc-300/80 hover:border-[#580A14] hover:bg-white hover:shadow-xl transition-all duration-300 text-center min-h-[220px]"
+                  >
+                    <div className="my-auto relative">
+                      <Folder className="w-20 h-20 text-amber-500 fill-amber-500/20 group-hover:scale-110 group-hover:text-amber-600 transition-transform duration-300" />
                     </div>
                     
                     <div className="w-full space-y-1 pt-3 border-t border-zinc-200">
